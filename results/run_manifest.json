@@ -1,0 +1,13 @@
+{
+  "replications": 100,
+  "configurations": 17,
+  "configuration_replications": 1700,
+  "measurement_days": 14,
+  "warmup_days": 7,
+  "root_seed": 341015,
+  "max_extra_followup_days": 0,
+  "workers": 8,
+  "wall_seconds": 12.89,
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+}

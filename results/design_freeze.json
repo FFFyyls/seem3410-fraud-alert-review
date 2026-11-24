@@ -1,0 +1,17 @@
+{
+  "pilot_root": 34101590,
+  "pilot_reps": 10,
+  "pilot_envs": [
+    "B",
+    "D",
+    "R"
+  ],
+  "warmup_days": 7,
+  "measurement_days": 14,
+  "main_root": 341015,
+  "replications": 100,
+  "configuration_count": 17,
+  "main_runs": 1700,
+  "initial_followup_days": 7,
+  "pilot_max_extra_followup_days": 0
+}

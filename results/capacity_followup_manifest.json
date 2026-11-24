@@ -1,0 +1,12 @@
+{
+  "root_seed": 34101593,
+  "replications": 100,
+  "configs": 8,
+  "total_runs": 800,
+  "warmup_days": 7,
+  "measurement_days": 14,
+  "initial_followup_days": 7,
+  "max_extra_followup_days": 0,
+  "workers": 8,
+  "wall_seconds": 6.43
+}
