@@ -1,0 +1,20 @@
+{
+  "question": "Does a fourth seat in the two demand peaks satisfy the low-risk guardrail at fewer paid seat-hours than a continuous fourth seat?",
+  "primary_environment": "B",
+  "stress_environments": ["D", "R"],
+  "root_seeds": {"B": 34101594, "D": 34101595, "R": 34101596},
+  "replications": 100,
+  "plans": ["fixed3", "peak4", "fixed4"],
+  "policy": "DYNAMIC",
+  "ageing_min": 20,
+  "warmup_days": 7,
+  "measurement_days": 14,
+  "initial_followup_days": 7,
+  "fourth_seat_windows_min": [[600, 780], [1080, 1260]],
+  "boundary_rule": "Repeat daily. A fourth seat can start only at left-inclusive, right-exclusive times; it finishes its active service without preemption. At simultaneous availability prefer the lowest regular seat ID, then the fourth seat.",
+  "outcomes": ["H_completion_late", "L_wait_gt60", "extra_scheduled_h_day", "extra_overtime_h_day", "extra_paid_h_day", "total_paid_h_day"],
+  "baseline_secondary": "B only: report P(W_L>60 | L arrives in [13:00,14:00)) and the corresponding [21:00,22:00) arrival cohort for the scheduled vs fixed-four A20 plans. If the B scheduled A20 guardrail is met, replay the same root/IDs on the same shifts with FCFS and estimate A20-minus-FCFS signed H and L contrasts; at least 2 pp H reduction is the original practical benchmark.",
+  "units": "H/L within-class fractions per replication, reported as % levels and pp differences; paid seat-hours per 24-hour day for staffing. Three permanent seats cost 72 seat-hours/day before the additional seat.",
+  "paid_definition": "All scheduled hours including idle time, plus only the actual fourth-seat busy time outside all its scheduled windows. All terms are intersected with the measurement period before division by measured days; no monetary or overtime-premium model.",
+  "inference": "Each plan replays the exact same alert-ID table within its environment and replication. Pointwise two-sided Student t intervals on 100 levels or within-replication differences, never pooled across environments. Upper 95% endpoint <=5% meets L guardrail; lower >5% exceeds; otherwise uncertain. No noninferiority or equivalence threshold assumed. No search over staffing windows, no optional stopping."
+}

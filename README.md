@@ -2,18 +2,19 @@
 
 Reproducibility package | SEEM3410 | Group 15
 
-Can a digital bank prioritize urgent alerts without leaving low-risk alerts in the queue too long? Open **results/decision_table.csv** for the original 17 configurations; the four-seat follow-up is in **results/capacity_followup_levels.csv**. All alerts are synthetic. No bank records, trained fraud model, or external service is needed.
+Can a digital bank prioritize urgent alerts without leaving low-risk alerts in the queue too long? Open **results/decision_table.csv** for the original 17 configurations, **results/capacity_followup_levels.csv** for the fixed-four follow-up, and **results/peak_staffing_B_levels.csv** for the six-hour peak-shift trial. All alerts are synthetic. No bank records, trained fraud model, or external service is needed.
 
 ## Reproduce the evidence
 
 Run these commands in this directory with Python 3.12.14 and NumPy 2.5.3 (the tested versions). If needed, install the single runtime dependency with `python -m pip install -r requirements.txt` in a virtual environment.
 
 ```sh
-python -m unittest -v test_engine test_analysis
+python -m unittest -v test_engine test_analysis test_peak_staffing
 python validation.py
 python run_experiments.py all --workers 8
 python check_warmup.py --workers 8
 python confirm_capacity.py --workers 8
+python peak_staffing.py --workers 8
 python export_trace.py
 python check_results.py
 ```
@@ -33,7 +34,7 @@ The system runs continuously, including overnight. Identical analysts serve one 
 | R | H/M/L probabilities 0.30/0.30/0.40 | 3 | Same three |
 | B_DYNAMIC_A10, B_DYNAMIC_A40 | Ageing interval 10 or 40 minutes instead of 20 | 3 | DYNAMIC only |
 
-FCFS chooses the oldest waiting alert. STATIC chooses H before M before L, oldest first within class. DYNAMIC selects the largest base score (H=2,M=1,L=0) plus floor(wait / A), with earliest arrival and then lowest alert ID breaking ties. Main A=20 minutes; A10/A40 are sensitivity analyses, not a tuning grid for picking a winner. At a common timestamp, completions release seats and all arrivals join before the next dispatch. No preemption, abandonment, shift change or service-time lookahead.
+FCFS chooses the oldest waiting alert. STATIC chooses H before M before L, oldest first within class. DYNAMIC selects the largest base score (H=2,M=1,L=0) plus floor(wait / A), with earliest arrival and then lowest alert ID breaking ties. Main A=20 minutes; A10/A40 are sensitivity analyses, not a tuning grid for picking a winner. At a common timestamp, completions release seats and all arrivals join before the next dispatch. No preemption, abandonment or service-time lookahead. Staffing is constant in the original matrix; only the separate peak-shift trial below introduces shift openings and closings.
 
 **Cohort and common random numbers.** For each root, replication, day and stream, NumPy PCG64 draws arrivals, positions, risks and service shocks separately. Alert identity fixes arrival, risk and service *before* scheduling. Policies share the same records within environment, C and ageing variants reuse B, and V/R transform shared primitive draws. D's rate change can alter counts and alert identities; no paired cross-demand effect is reported. Inter-replication seeds are separate. In the main study, the system starts empty, burns in for seven days, then measures arrivals in [day 7, day 21). The system is never reset at midnight. Newly arriving alerts continue competing after the endpoint until the entire measurement cohort is served; service is followed to completion. Seven days of exogenous follow-up are available initially and extended in seven-day increments if necessary. None required extension in the reported runs.
 
@@ -64,8 +65,25 @@ Before running the main sample, use the more demanding of four baseline targets:
 | Can I inspect individual synthetic alerts? | example_alerts.csv: 550 alerts from main B/rep 0/first measurement day, with fixed class/service and all three start/finish times. Use export_trace.py --day 1..14 --rep 0..99 to select another cohort day. |
 | Does the event model reproduce textbook or hand calculations? | validation_summary.csv, validation_replications.csv, validation_hand_trace.csv. validation_synthetic_inputs.csv checks generated inputs against their configured assumptions. |
 | Does the four-seat result survive higher stress? | capacity_followup_levels.csv (%), capacity_followup_paired.csv (pp), capacity_followup_replications.csv (raw fractions), capacity_followup_manifest.json |
+| Does adding a seat only during peaks work? What does it cost? | peak_staffing_design.json (frozen inputs and decision rules); peak_staffing_{B,D,R}_levels.csv, _paired.csv, _replications.csv and _manifest.json (one set per environment). |
 
 **Decision.** In the main study, all three-seat policies exceeded the low-risk guardrail. With four seats under baseline inputs, A20 lowered high-risk lateness by 6.38 pp (95% CI: 6.15-6.60 pp reduction) versus four-seat FCFS, while 1.07% of low-risk alerts waited over 60 minutes (0.90-1.23%). Strict priority missed the guardrail even with four seats.
 
 **Separate capacity follow-up:** `python confirm_capacity.py --workers 8` fixes four seats and compares only FCFS versus A20 under B, D, V and R. It uses **independent root 34101593**, 100 replications per configuration, the same 7+14-day windows, and 800 runs separate from the main 1,700. No parameter was retuned. A20's low-risk rate met the target in B and V, was uncertain at +10% demand (4.71%, 4.35-5.08%), and exceeded it when the H share rose to 30% (7.51%, 7.07-7.96%). One-factor scenarios do not establish performance under combined stresses. No saved time is translated into fraud losses or monetary savings.
+
+## Six hours of peak coverage: sufficient at baseline, not under either stress
+
+`python peak_staffing.py --env B --workers 8` replays the same baseline alert IDs for three A20 staffing plans on 100 new replication sets (root 34101594). Three seats are always present. The flexible fourth seat starts work only during [10:00,13:00) and [18:00,21:00); when both can take an alert, use a permanent seat first. A job already in service at closing finishes without interruption. Extra paid time includes idle scheduled coverage and only actual fourth-seat work outside *all* its windows, clipped to the 14 measured days. These are seat-hours, not numbers of employees or monetary costs.
+
+| Baseline plan (A20 throughout) | H completion >30 min, % [95% CI] | L wait >60 min, % [95% CI] | Extra paid seat-h/day |
+| --- | ---: | ---: | ---: |
+| Fixed three | 38.75 [37.79, 39.70] | 30.35 [29.40, 31.31] | 0 |
+| Fourth seat during peaks | 9.36 [8.90, 9.82] | 2.98 [2.65, 3.31] | 6.171 [6.165, 6.178] |
+| Fixed four | 6.68 [6.36, 6.99] | 1.29 [1.09, 1.49] | 24 |
+
+The peak plan uses six scheduled hours plus 0.171 hours of overtime per day. It saves 17.829 paid seat-hours/day versus fixed four (74.3% of the **fourth seat's incremental hours**, 18.6% of **all** seat-hours). In exchange, H lateness rises 2.68 pp [2.49, 2.88] and L long waits rise 1.69 pp [1.53, 1.85] versus fixed four. It passes the **overall** L guardrail, not an hourly one: among L arrivals in [13:00,14:00) and [21:00,22:00), long-wait rates are 10.68% and 9.27% on peaks-only coverage, compared with 1.77% and 1.49% for the same arrival subsets on fixed four.
+
+Because the peak plan met the aggregate B guardrail, a prespecified secondary comparison replayed the same 100 input tables under **FCFS on those identical shifts**. A20 reduced H lateness by 8.76 pp [8.49, 9.02] from FCFS's 18.11%, comfortably above the 2 pp practical benchmark. A20 increased L long waits by 2.20 pp [1.98, 2.42] versus that same-schedule FCFS comparator, while keeping the aggregate level below 5%.
+
+Run `--env D` (+10% arrivals; root 34101595) and `--env R` (H/M/L=30/30/40%; root 34101596) for separate stress tests, or omit `--env` for all three studies. Both used 100 matched replications, no combined stress and no search over shift windows. Peak coverage missed the L guardrail in **D: 11.68% [10.91, 12.46]** and **R: 18.53% [17.53, 19.54]**. Fixed four also missed it in R (7.99% [7.51, 8.47]). In D, fixed four met it in this sample (4.55% [4.21, 4.89]); the earlier independent fixed-four study straddled 5%, so treat that case as near the boundary rather than reliably safe.
 

@@ -121,9 +121,8 @@ def _state_counts(a, b, d, times):
     return arrived-started, started-ended
 
 
-def simulate(inputs: Inputs, policy: str, capacity: int, t0: float, t1: float,
-             ageing: float = 20, *, audit: bool = False) -> Result:
-    """Simulate from an empty system, measure [t0,t1), then follow its cohort.
+def _dispatch(inputs, policy, capacity, t0, t1, ageing, *, audit=False, select_seat=None):
+    """Shared dispatch clock for fixed and scheduled-seat experiments.
 
     Dispatch-clock DES: when all seats are busy, arrivals up to the next free
     time can be enqueued in one batch. This skips no dispatch opportunities.
@@ -148,14 +147,21 @@ def simulate(inputs: Inputs, policy: str, capacity: int, t0: float, t1: float,
     now = 0.
     while True:
         next_arrival = a[i] if i < n else inf
-        t = max(now,min(free_at),now if waiting else next_arrival)
+        if select_seat is None:
+            t = max(now,min(free_at),now if waiting else next_arrival)
+        else:
+            # The scheduled path can wake at a shift opening, even when no
+            # arrival or service completion occurs. A waiting job is not needed
+            # before the opening: all arrivals up to the clock join below.
+            t,seat = select_seat(free_at,max(now,now if waiting else next_arrival))
         if t >= t1 and cohort_starts == hi-lo:
             break
         if t >= inputs.horizon_min:
             raise InsufficientFollowup("cohort still waiting at input horizon; extend inputs")
         while i < n and a[i] <= t:
             q[r[i]].append(i); i += 1; waiting += 1
-        seat = next(j for j,u in enumerate(free_at) if u <= t)
+        if select_seat is None:
+            seat = next(j for j,u in enumerate(free_at) if u <= t)
         # Within one risk class its oldest alert weakly dominates every younger
         # score and also wins equal scores. Thus only three heads need scoring.
         if policy == "STATIC":
@@ -179,8 +185,15 @@ def simulate(inputs: Inputs, policy: str, capacity: int, t0: float, t1: float,
     cohort = slice(lo,hi)
     if max(d[cohort], default=0.) > inputs.horizon_min:
         raise InsufficientFollowup("cohort finishes after input horizon; extend inputs")
+    return lo,hi,np.asarray(b[:hi]),np.asarray(d[:hi]),np.asarray(analyst[:hi],dtype=int)
+
+
+def simulate(inputs: Inputs, policy: str, capacity: int, t0: float, t1: float,
+             ageing: float = 20, *, audit: bool = False) -> Result:
+    """Fixed seats, original contract. No shift calendar or new input required."""
+    lo,hi,b0,d0,analyst = _dispatch(inputs,policy,capacity,t0,t1,ageing,audit=audit)
+    cohort = slice(lo,hi)
     a0 = inputs.arrival[:hi]; r0 = inputs.risk[:hi]
-    b0 = np.asarray(b[:hi]); d0 = np.asarray(d[:hi])
     span = t1-t0
     # Exact state areas: integrate one customer's waiting/busy indicator, then
     # sum. This also includes pre-t0 arrivals overlapping the measurement window.
@@ -214,5 +227,5 @@ def simulate(inputs: Inputs, policy: str, capacity: int, t0: float, t1: float,
             assert arrived == done+row["waiting"]+row["busy"]
             assert row["waiting"] == 0 or row["busy"] == capacity
     return Result(np.arange(lo,hi),r0[cohort],a0[cohort],b0[cohort],
-                  d0[cohort],np.array(analyst[cohort],dtype=int),
+                  d0[cohort],analyst[cohort],
                   mean_q,utilization,max_q,q_end,unfinished,daily)

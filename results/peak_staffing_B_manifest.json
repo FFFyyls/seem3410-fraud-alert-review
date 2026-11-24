@@ -1,0 +1,15 @@
+{
+  "environment": "B",
+  "root_seed": 34101594,
+  "replications": 100,
+  "plans": [
+    "fixed3",
+    "peak4",
+    "fixed4",
+    "peak4_FCFS"
+  ],
+  "scenario_runs": 400,
+  "max_extra_followup_days": 0,
+  "peak4_guardrail_met": true,
+  "secondary_FCFS_run": true
+}
