@@ -79,7 +79,7 @@ Before running the main sample, use the more demanding of four baseline targets:
 | --- | ---: | ---: | ---: |
 | Fixed three | 38.75 [37.79, 39.70] | 30.35 [29.40, 31.31] | 0 |
 | Fourth seat during peaks | 9.36 [8.90, 9.82] | 2.98 [2.65, 3.31] | 6.171 [6.165, 6.178] |
-| Fixed four | 6.68 [6.36, 6.99] | 1.29 [1.09, 1.49] | 24 |
+| Fixed four | 6.67 [6.36, 6.99] | 1.29 [1.09, 1.49] | 24 |
 
 The peak plan uses six scheduled hours plus 0.171 hours of overtime per day. It saves 17.829 paid seat-hours/day versus fixed four (74.3% of the **fourth seat's incremental hours**, 18.6% of **all** seat-hours). In exchange, H lateness rises 2.68 pp [2.49, 2.88] and L long waits rise 1.69 pp [1.53, 1.85] versus fixed four. It passes the **overall** L guardrail, not an hourly one: among L arrivals in [13:00,14:00) and [21:00,22:00), long-wait rates are 10.68% and 9.27% on peaks-only coverage, compared with 1.77% and 1.49% for the same arrival subsets on fixed four.
 
