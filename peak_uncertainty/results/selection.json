@@ -1,0 +1,8 @@
+{
+  "selected_lunch_offset_min": 0,
+  "selected_evening_offset_min": 0,
+  "n_grid": 25,
+  "screened_in": 4,
+  "training_root": 34102611,
+  "holdout_root": 34102612
+}

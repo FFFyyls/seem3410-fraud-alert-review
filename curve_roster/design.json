@@ -1,0 +1,18 @@
+{
+  "training_day": 0,
+  "test_day": 1,
+  "training_seed": 34102641,
+  "test_seed": 34102642,
+  "training_reps": 16,
+  "test_reps": 80,
+  "warmup_days": 14,
+  "measure_days": 14,
+  "initial_followup_days": 7,
+  "expected_alerts_day": 540,
+  "guardrail_low_pct": 5.0,
+  "allowed_rosters": "One fourth seat in two nonoverlapping 3-hour blocks; integer start hours, both finish within one 24-hour day; touching blocks give one continuous 6-hour shift. No overtime truncation.",
+  "selection": "Test the aggregate low-risk waiting guardrail on training pointwise 95% upper bounds; if any pass, choose the smallest H rate then L. Otherwise choose the smallest (H rate + L rate)/2, then H, then L. Lexicographically earlier starts break remaining ties. Rates in percentage points, equal weight per risk class.",
+  "comparisons": "On the second day's curve use the locked winner versus the original split (10,18), best contiguous six hours by training selection, and six allowable hours with highest training volume (then lexicographic start). Also record H-only and L-only training winners for sensitivity and same-roster FCFS as a diagnostic. Deduplicate identical plans.",
+  "within_replication": "Same arrivals, risk marks and active service duration in every policy replay.",
+  "source_day_use": "Each relative source day independently gives 24 rates normalized to 540 alerts/day. Repeating one shape per simulation day creates synthetic replicates conditional on that single timing curve, not independent observed days. No local civil clock."
+}

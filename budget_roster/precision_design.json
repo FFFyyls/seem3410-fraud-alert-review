@@ -1,0 +1,14 @@
+{
+  "reason": "Original 80-replication 25-budget screen and the new 80-replication confirmation disagree about the 12-hour pointwise L rule. Resolve simulation precision near the boundary without changing either set of results.",
+  "source_and_scope": "Relative day 2 transaction timing shape with the same workload assumptions. New randomness, not a new observed curve. Use only the fixed first-day-trained 11-, 12-, and 13-hour rosters already locked in results/locked_rosters.json. No new schedule search.",
+  "windows": {"11": "10-16/17-22", "12": "10-16/17-23", "13": "10-23"},
+  "root_seed": 34102644,
+  "replications": 1200,
+  "replication_design": "14 warm-up, 14 measured days, ongoing arrivals for follow-up; shared cases across all 3 rosters, A20 and their same-roster FCFS comparators. No interim stopping or adaptive additions.",
+  "decision": "Use only the new samples for the precision verdict. Select the smallest of the three locked budgets whose upper two-sided Bonferroni 95% simultaneous L limit is <=5%. If its preceding tested budget's lower simultaneous limit >5%, it clearly fails; a crossing interval means lack of assurance only. Also report original separate same-roster H improvement check (lower paired pointwise 95% limit >=2 pp). Other budgets retain the original screen.",
+  "report": "For each roster: H/L pointwise levels, simultaneously adjusted L interval (3 comparisons), extra paid hours and same-roster FCFS H comparison. Paired adjacent-budget contrasts and 13 vs 11 under A20; these intervals are pointwise and descriptive. All simulations conditional on the single held-out curve.",
+  "df": 1199,
+  "pointwise_t975": 1.9619444908394384,
+  "simultaneous_L_t": 2.397344223233653,
+  "quantile_verification": "Inverse two-sided Student tail I_{df/(df+t^2)}(df/2,1/2) at 0.05 and 0.05/3 respectively. Verified with high-precision regularized incomplete beta at design time; run needs only NumPy."
+}

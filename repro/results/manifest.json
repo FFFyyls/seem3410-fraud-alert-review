@@ -1,0 +1,27 @@
+{
+  "root_seed": 34101600,
+  "replications": 100,
+  "scenarios": [
+    "synthetic_base",
+    "synthetic_delay60",
+    "proxy_phase0",
+    "proxy_phase12"
+  ],
+  "plans": [
+    "fixed3_A20",
+    "peak_A20",
+    "shift30_A20",
+    "fixed4_A20",
+    "peak_FCFS",
+    "shift30_FCFS"
+  ],
+  "simulation_runs": 2400,
+  "warmup_days": 14,
+  "measurement_days": 14,
+  "max_extra_followup_days": 0,
+  "wall_seconds": 19.553402399877086,
+  "python": "3.12.14",
+  "numpy": "2.5.3",
+  "workers": 8,
+  "uncertainty": "Monte Carlo conditional on fixed assumed inputs; proxy is exploratory"
+}

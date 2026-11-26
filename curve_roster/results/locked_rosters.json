@@ -1,0 +1,26 @@
+{
+  "selected": [
+    11,
+    16
+  ],
+  "original": [
+    10,
+    18
+  ],
+  "best_contiguous": [
+    11,
+    14
+  ],
+  "highest_demand": [
+    9,
+    20
+  ],
+  "H_only": [
+    11,
+    16
+  ],
+  "L_only": [
+    11,
+    17
+  ]
+}

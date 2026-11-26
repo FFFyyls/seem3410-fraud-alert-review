@@ -1,0 +1,11 @@
+{
+  "archived_simulations": 2400,
+  "independently_recomputed_intervals": 560,
+  "replayed_configurations": 24,
+  "warmup_comparisons": 240,
+  "warmup_comparisons_with_changed_starts": 0,
+  "max_warmup_change_min": 0.0,
+  "unit_tests_passed": 29,
+  "source_data_tests_owned_by": "data/test_profile.py",
+  "test_command": "python -B -m unittest discover -v"
+}

@@ -2,6 +2,10 @@
 
 Reproducibility package | SEEM3410 | Group 15
 
+**Start with the [final study and reproduction guide](FINAL_STUDY.md).** It includes the experiments on uncertain peak times, schedules learned from a previous day's workload, and the minimum fourth-seat coverage supported by the held-out workload curve.
+
+## Original study
+
 Can a digital bank prioritize urgent alerts without leaving low-risk alerts in the queue too long? Open **results/decision_table.csv** for the original 17 configurations, **results/capacity_followup_levels.csv** for the fixed-four follow-up, and **results/peak_staffing_B_levels.csv** for the six-hour peak-shift trial. All alerts are synthetic. No bank records, trained fraud model, or external service is needed.
 
 ## Reproduce the evidence

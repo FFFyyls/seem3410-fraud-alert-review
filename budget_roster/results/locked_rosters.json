@@ -1,0 +1,227 @@
+[
+  {
+    "budget": 0,
+    "window": "off",
+    "candidates": 1,
+    "training_H_pct": 68.53709263233665,
+    "training_L_pct": 62.962387172768366,
+    "training_L_hi": 65.54129768595189,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 1,
+    "window": "11-12",
+    "candidates": 24,
+    "training_H_pct": 60.83356293970354,
+    "training_L_pct": 53.77642749627053,
+    "training_L_hi": 56.24432225164146,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 2,
+    "window": "11-12/13-14",
+    "candidates": 276,
+    "training_H_pct": 54.01044895382828,
+    "training_L_pct": 45.6142000267689,
+    "training_L_hi": 48.10374056931742,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 3,
+    "window": "11-13/14-15",
+    "candidates": 484,
+    "training_H_pct": 48.362383320168334,
+    "training_L_pct": 40.58086724934378,
+    "training_L_hi": 43.079616670541995,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 4,
+    "window": "11-13/14-16",
+    "candidates": 231,
+    "training_H_pct": 44.36484789780501,
+    "training_L_pct": 35.83168891835581,
+    "training_L_hi": 37.75909377519992,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 5,
+    "window": "11-14/16-18",
+    "candidates": 400,
+    "training_H_pct": 40.10763731132148,
+    "training_L_pct": 30.6990897635105,
+    "training_L_hi": 32.8397541080683,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 6,
+    "window": "11-14/16-19",
+    "candidates": 190,
+    "training_H_pct": 35.4731156437189,
+    "training_L_pct": 25.327042363659036,
+    "training_L_hi": 27.548512303424737,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 7,
+    "window": "11-15/17-20",
+    "candidates": 324,
+    "training_H_pct": 30.900001624917607,
+    "training_L_pct": 20.1955368795574,
+    "training_L_hi": 22.411735396303744,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 8,
+    "window": "11-15/17-21",
+    "candidates": 153,
+    "training_H_pct": 26.059511982565844,
+    "training_L_pct": 14.973272215099888,
+    "training_L_hi": 17.16619378145512,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 9,
+    "window": "11-15/17-22",
+    "candidates": 256,
+    "training_H_pct": 21.66960955244054,
+    "training_L_pct": 10.416996797301415,
+    "training_L_hi": 12.467046922333488,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 10,
+    "window": "11-16/17-22",
+    "candidates": 120,
+    "training_H_pct": 17.65436486727775,
+    "training_L_pct": 7.385566856266511,
+    "training_L_hi": 8.890075148556793,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 11,
+    "window": "10-16/17-22",
+    "candidates": 196,
+    "training_H_pct": 13.816203388640048,
+    "training_L_pct": 5.393517242697339,
+    "training_L_hi": 6.201148081850674,
+    "num_training_L_pass": 0
+  },
+  {
+    "budget": 12,
+    "window": "10-16/17-23",
+    "candidates": 91,
+    "training_H_pct": 10.818929973641724,
+    "training_L_pct": 2.966460579426382,
+    "training_L_hi": 3.4708834428463486,
+    "num_training_L_pass": 2
+  },
+  {
+    "budget": 13,
+    "window": "10-23",
+    "candidates": 144,
+    "training_H_pct": 9.406242351091889,
+    "training_L_pct": 2.219046896493586,
+    "training_L_hi": 2.724081954560493,
+    "num_training_L_pass": 9
+  },
+  {
+    "budget": 14,
+    "window": "09-23",
+    "candidates": 66,
+    "training_H_pct": 8.213650222486809,
+    "training_L_pct": 1.699749562132331,
+    "training_L_hi": 2.163133901374967,
+    "num_training_L_pass": 6
+  },
+  {
+    "budget": 15,
+    "window": "09-24",
+    "candidates": 100,
+    "training_H_pct": 7.4493754314770735,
+    "training_L_pct": 1.0614486028121073,
+    "training_L_hi": 1.3905769768065144,
+    "num_training_L_pass": 10
+  },
+  {
+    "budget": 16,
+    "window": "08-24",
+    "candidates": 45,
+    "training_H_pct": 7.263548046180048,
+    "training_L_pct": 1.0400132496342245,
+    "training_L_hi": 1.370104792653067,
+    "num_training_L_pass": 7
+  },
+  {
+    "budget": 17,
+    "window": "07-24",
+    "candidates": 64,
+    "training_H_pct": 7.263548046180048,
+    "training_L_pct": 1.0400132496342245,
+    "training_L_hi": 1.370104792653067,
+    "num_training_L_pass": 11
+  },
+  {
+    "budget": 18,
+    "window": "06-24",
+    "candidates": 28,
+    "training_H_pct": 7.25533364762617,
+    "training_L_pct": 1.0400132496342245,
+    "training_L_hi": 1.370104792653067,
+    "num_training_L_pass": 7
+  },
+  {
+    "budget": 19,
+    "window": "05-24",
+    "candidates": 36,
+    "training_H_pct": 7.25533364762617,
+    "training_L_pct": 1.0400132496342245,
+    "training_L_hi": 1.370104792653067,
+    "num_training_L_pass": 10
+  },
+  {
+    "budget": 20,
+    "window": "04-24",
+    "candidates": 15,
+    "training_H_pct": 7.25533364762617,
+    "training_L_pct": 1.0400132496342245,
+    "training_L_hi": 1.370104792653067,
+    "num_training_L_pass": 6
+  },
+  {
+    "budget": 21,
+    "window": "03-24",
+    "candidates": 16,
+    "training_H_pct": 7.25533364762617,
+    "training_L_pct": 1.0400132496342245,
+    "training_L_hi": 1.370104792653067,
+    "num_training_L_pass": 12
+  },
+  {
+    "budget": 22,
+    "window": "02-24",
+    "candidates": 6,
+    "training_H_pct": 7.25533364762617,
+    "training_L_pct": 1.0400132496342245,
+    "training_L_hi": 1.370104792653067,
+    "num_training_L_pass": 6
+  },
+  {
+    "budget": 23,
+    "window": "01-24",
+    "candidates": 4,
+    "training_H_pct": 7.238596951998834,
+    "training_L_pct": 1.0334261042432304,
+    "training_L_hi": 1.358529197063522,
+    "num_training_L_pass": 4
+  },
+  {
+    "budget": 24,
+    "window": "00-24",
+    "candidates": 1,
+    "training_H_pct": 7.155763124600974,
+    "training_L_pct": 0.9659610168244257,
+    "training_L_hi": 1.264764167534719,
+    "num_training_L_pass": 1
+  }
+]

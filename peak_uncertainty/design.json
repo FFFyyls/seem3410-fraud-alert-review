@@ -1,0 +1,19 @@
+{
+  "question": "Which fourth-seat roster should be posted before tomorrow's two peak starts are observed?",
+  "peak_law": "Separate independent Uniform[-60,60] minute errors for the two peak starts each day and across days; each peak lasts 180 min.",
+  "fixed_policy": "Three permanent seats plus one scheduled fourth; A20 non-preemptive dispatch. Six scheduled seat-hours/day; paid time includes actual finish-after-close work.",
+  "nominal_starts_min": [600,1080],
+  "roster_offsets_min": [-60,-30,0,30,60],
+  "warmup_days": 14,
+  "measurement_days": 14,
+  "initial_followup_days": 7,
+  "screen_root": 34102611,
+  "screen_reps": 32,
+  "holdout_root": 34102612,
+  "holdout_reps": 80,
+  "peak_rng_stream": 77,
+  "selection": "Among rosters whose screening upper pointwise 95% bound on all-day low-risk waits >60 minutes is <=5%, choose lowest mean high-risk arrival-to-completion >30 minutes. If no roster clears the screen, choose lowest mean low-risk rate, then H, and mark the guardrail unmet in screening. Break exact ties in favor of lower L, then smaller absolute clock changes.",
+  "heldout_comparators": "Validate the locked A20 roster, nominal A20, uniform +30 and -30 A20 shifts, and FCFS on the selected roster, on identical uncertain arrivals and work. Separately compare the nominal roster with the same nominal roster and no timing errors (same daily counts, risk labels, and work).",
+  "estimand": "Average class-specific share across independent 14-day replications. Pointwise two-sided 95% Student intervals across replications; changes are paired first. Fixed 13-14/21-22 L cohorts are diagnostics, not selection inputs.",
+  "scope": "Synthetic symmetric peak uncertainty; no access to today's error by planners. Optimality restricted to this finite screening criterion. Five-percent service limit is an all-day criterion, not a worst-day guarantee."
+}

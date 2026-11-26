@@ -1,0 +1,9 @@
+scenario,study_scope,plan,aggregate_L_upper_pct,original_close_13_upper_pct,original_close_21_upper_pct,H_vs_same_schedule_FCFS_upper_pp,aggregate_pass,fixed_windows_pass,H_benefit_pass,protected_candidate
+synthetic_base,prespecified_synthetic,peak_A20,3.182876646980713,11.801875180173425,9.381396369245058,-8.448288918490078,True,False,True,False
+synthetic_base,prespecified_synthetic,shift30_A20,3.1417065629366077,9.067558351946191,7.540129280200794,-9.468110325383018,True,False,True,False
+synthetic_delay60,prespecified_synthetic,peak_A20,8.181354794647946,33.68470075181691,30.663170529901986,-10.204967042907182,False,False,True,False
+synthetic_delay60,prespecified_synthetic,shift30_A20,4.893386476764226,21.493581579489717,18.31848195677802,-9.450376668347088,True,False,True,False
+proxy_phase0,exploratory_proxy,peak_A20,30.66050334501535,11.586420612726632,56.67060878201734,-12.888917000919541,False,False,True,False
+proxy_phase0,exploratory_proxy,shift30_A20,30.44852776658664,8.690845190742973,52.99758880479364,-13.555254087762167,False,False,True,False
+proxy_phase12,exploratory_proxy,peak_A20,60.93341301747429,34.54743304494727,2.7601847350044064,-8.183089296221981,False,False,True,False
+proxy_phase12,exploratory_proxy,shift30_A20,59.56395415372083,32.80586310773187,1.1616600028449091,-8.187401739462144,False,False,True,False
